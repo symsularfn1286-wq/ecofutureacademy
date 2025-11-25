@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KIWA </title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+  /* Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin:0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    background: #f9fafb;
+    color: #1f2937;
+  }
+  a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  a:hover, a:focus {
+    text-decoration: underline;
+  }
+  header, footer {
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 16px 32px;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    user-select: none;
+  }
+  .header-center {
+    flex-grow: 1;
+    margin-left: 32px;
+  }
+  nav.main-nav {
+    display: flex;
+    gap: 24px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  nav.main-nav a {
+    padding: 8px 0;
+    position: relative;
+  }
+  nav.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #2563eb;
+    transition: width 0.3s ease;
+  }
+  nav.main-nav a:hover::after,
+  nav.main-nav a:focus::after {
+    width: 100%;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .icon-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #f8fafc;
+    font-size: 1.25rem;
+    position: relative;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .profile-name {
+    font-weight: 600;
+  }
+  /* Advanced Search */
+  .advanced-search {
+    background: #fff;
+    max-width: 900px;
+    margin: 32px auto;
+    padding: 24px 32px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .advanced-search input[type="text"],
+  .advanced-search select {
+    flex: 1 1 220px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1.5px solid #cbd5e1;
+    font-size: 1rem;
+    outline-offset: 2px;
+  }
+  .advanced-search button {
+    background: #2563eb;
+    border: none;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    flex: 0 0 auto;
+    transition: background 0.25s ease;
+  }
+  .advanced-search button:hover,
+  .advanced-search button:focus {
+    background: #1d4ed8;
+  }
+  main {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0 16px;
+  }
+  footer {
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  /* Detail Collection Wireframe */
+  .detail-back-link {
+    font-weight: 600;
+    margin-top: 24px;
+    display: inline-block;
+    margin-bottom: 24px;
+  }
+  .detail-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 32px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 0.1);
+    padding: 32px;
+  }
+  .cover-image {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 0.15);
+    object-fit: cover;
+  }
+  .collection-info h2 {
+    font-size: 2rem;
+    margin: 0 0 12px 0;
+    font-weight: 800;
+    color: #1e40af;
+  }
+  .collection-meta {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-bottom: 24px;
+  }
+  .collection-meta strong {
+    color: #334155;
+  }
+  .synopsis {
+    margin-bottom: 24px;
+  }
+  .status {
+    font-weight: 600;
+    color: #065f46;
+    margin-bottom: 16px;
+  }
+  .loan-limit {
+    font-size: 0.9rem;
+    color: #374151;
+    margin-bottom: 32px;
+  }
+  .action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    border: none;
+    color: white;
+    padding: 14px 36px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgb(37 99 235 / 0.4);
+    transition: background 0.25s ease;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+  }
+  .btn-secondary {
+    background: transparent;
+    border: 2px solid #2563eb;
+    color: #2563eb;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .btn-secondary:hover,
+  .btn-secondary:focus {
+    background: #2563eb;
+    color: white;
+  }
+  .user-reviews {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 24px;
+  }
+  .user-reviews h3 {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+    color: #1e293b;
+  }
+  .review-item {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #475569;
+  }
+  .review-item strong {
+    color: #334155;
+  }
+  .review-form textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1.5px solid #cbd5e1;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    outline-offset: 2px;
+  }
+  .review-form button {
+    background: #10b981;
+    border: none;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  .review-form button:hover,
+  .review-form button:focus {
+    background: #059669;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .detail-container {
+      grid-template-columns: 1fr;
+      padding: 24px;
+    }
+    .cover-image {
+      max-width: 100%;
+      margin: 0 auto 24px;
+      display: block;
+    }
+    .header-center {
+      margin-left: 16px;
+    }
+    nav.main-nav {
+      gap: 16px;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <div class="logo" aria-label="Logo HIMMARIS">HIMMARIS</div>
+  <div class="header-center">
+    <nav class="main-nav" role="navigation" aria-label="Navigasi Utama">
+      <a href="#" tabindex="0">Profie</a>
+      <a href="#" tabindex="0">Event</a>
+      <a href="#" tabindex="0">Draft</a>
+      <a href="#" tabindex="0">Help</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <button class="icon-button" aria-label="Notifikasi">
+      <span class="material-icons" aria-hidden="true" style="font-size: 24px;">notifications</span>
+    </button>
+    <div class="profile" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Profil Pengguna">
+      <img src="https://drive.google.com/file/d/1T101Kp194-_gNUhERUZdT5-0k9DRIYWG/view?usp=drive_link" alt="Foto profil pengguna" />
+      <span class="profile-name">Wax</span>
+      <span class="material-icons" aria-hidden="true" style="font-size: 18px;">arrow_drop_down</span>
+    </div>
+  </div>
+</header>
+
+
+<main>
+
+<!-- Homepage Wireframe -->
+<section aria-label="Beranda E-Library">
+  <form class="advanced-search" role="search" aria-describedby="search-instruction">
+    <input type="text" placeholder="Cari apa yang anda cari..." />
+    
+    <button type="submit" aria-label="Cari koleksi digital">Cari</button>
+  </form>
+</section>
+
+<!-- Detail Koleksi Wireframe -->
+<section aria-label="Detail Koleksi Digital" style="margin-top: 64px;">
+    <img 
+      src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9e0a8277-61f8-47d3-bb7d-215f12ef95cd.png" 
+      alt="Gambar cover buku E-book berjudul Transformasi Digital di Era Industri 4.0"
+      class="cover-image" />
+    <div class="collection-info">
+      <h2>Transformasi Digital di Era Industri 4.0</h2>
+      <div class="collection-meta">
+        <p><strong>Penulis:</strong> Tere Liye </p>
+        <p><strong>Penerbit:</strong> Sabak Grip Nusantara </p>
+        <p><strong>Tahun Terbit:</strong> 2024 </p>
+        <p><strong>ISBN:</strong> 978-602-XXXX-YYYY-Z </p>
+        <p><strong>Jenis Koleksi:</strong> E-book </p>
+        <p><strong>Kategori:</strong> Teknologi, Inovasi, Manajemen</p>
+      </div>
+      <section class="synopsis" aria-label="Sinopsis Koleksi">
+        <h3>Sinopsis</h3>
+        <p>
+          Sebuah paragraf panjang yang menjelaskan isi koleksi secara detail, mencakup tujuan, metode, dan kesimpulan utama. Ini akan membantu pengguna memahami relevansi koleksi.
+        </p>
+      </section>
+      <p class="status" aria-live="polite"><strong>Status:</strong> Tersedia (3 dari 5 Salinan)</p>
+      <p class="loan-limit"><strong>Batas Waktu Peminjaman:</strong> 7 Hari (untuk E-book)</p>
+      <div class="action-buttons">
+        <button class="btn-primary" type="button" aria-label="Pinjam atau Baca Online koleksi ini">Pinjam / Baca Online</button>
+        <button class="btn-secondary" type="button" aria-label="Tambahkan \toleksi ini ke favorit">Tambahkan ke Favorit</button>
+        <button class="btn-secondary" type="button" aria-label="Bagikan koleksi ini">Bagikan</button>
+      </div>
+      <section class="user-reviews" aria-label="Ulasan">
+        <h3>Ulasan</h3>
+        <article class="review-item">
+          <p>"-" <strong>- alawi</strong></p>
+        </article>
+        <article class="review-item">
+          <p>"-" <strong>- p</strong></p>
+        </article>
+        <form class="review-form" aria-label="Form Tulis Ulasan">
+          <label for="review-text" class="sr-only">Tulis ulasan Anda</label>
+          <textarea id="review-text" placeholder="Tulis ulasan Anda..." aria-multiline="true"></textarea>
+          <button type="submit">Tulis Ulasan Anda</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Tentang Kami &copy; HIMMARIS </p>
+</footer>
+
+</body>
+</html>
+

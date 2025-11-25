@@ -1,0 +1,13 @@
+/src
+├── components/
+│   ├── DashboardHome.jsx
+│   ├── RecyclingCalculator.jsx
+│   ├── PickupOptionModal.jsx
+│   ├── TransactionHistory.jsx
+│   ├── Marketplace.jsx
+│   ├── LevelBadge.jsx
+│   └── PriceTicker.jsx
+├── contexts/
+│   └── UserContext.jsx
+├── App.jsx
+└── main.jsx
